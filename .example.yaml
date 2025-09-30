@@ -1,0 +1,33 @@
+name: CI
+
+on: [push, pull_request]
+
+# прогнать тесты на всех версиях python в списке
+strategies:
+  matrix:
+    python-version: [3.13.5, 3.12.4, 3.11.4]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13.5'
+      # в cache сохраняем зависимости
+      - name: cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+      - name: Install dependencies
+        run: pip3 install -r requirements.txt
+      - name: Run tests
+        run: pytest .
+      - name: Run lint
+        run: flake8 .
