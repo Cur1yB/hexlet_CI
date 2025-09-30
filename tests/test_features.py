@@ -5,6 +5,7 @@ from app.features import (
     make_reverse,
 )
 
+
 @pytest.mark.parametrize(
         'word, expected', [
             ("А роза упала на лапу Азора", True),
@@ -15,6 +16,7 @@ from app.features import (
 def test_is_palindrome(word, expected):
     assert is_palindrome(word) == expected
 
+
 @pytest.mark.parametrize(
     "word1, word2, expected", [
         ('cat', 'act', True),
@@ -24,6 +26,7 @@ def test_is_palindrome(word, expected):
 )
 def test_is_anagram(word1, word2, expected):
     assert is_anagram(word1, word2) == expected
+
 
 @pytest.mark.parametrize(
     "word, expected", [
