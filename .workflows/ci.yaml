@@ -1,0 +1,20 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13.5'
+      - name: Install dependencies
+        run: uv sync
+      - name: Run tests
+        run: uv run pytest
+      - name: Run lint
+        run: uv run flake8 check .
