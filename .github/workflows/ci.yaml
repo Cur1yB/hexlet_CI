@@ -13,8 +13,8 @@ jobs:
         with:
           python-version: '3.13.5'
       - name: Install dependencies
-        run: uv sync
+        run: pip3 install -r requirements.txt
       - name: Run tests
-        run: uv run pytest
+        run: pytest .
       - name: Run lint
-        run: uv run flake8 check .
+        run: flake8 check .
