@@ -17,4 +17,4 @@ jobs:
       - name: Run tests
         run: pytest .
       - name: Run lint
-        run: flake8 check .
+        run: flake8 .
